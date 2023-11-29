@@ -6,7 +6,7 @@ class Canvas(list):
         self.width = width
         self.height = height
 
-    def print_canvas(self):
+    def print(self):
         header = " " + "".join([str(i % 10) for i in range(self.width)])
         print(header)
         for idx, row in enumerate(self):
@@ -138,4 +138,4 @@ draw_n_gon(canvas, (72, 25), 12, 20, 80, "-")
 
 # Print what we have painted
 #print_canvas(canvas)
-canvas.print_canvas()
+canvas.print()
