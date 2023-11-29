@@ -1,22 +1,17 @@
 import math
 
+class Canvas(list):
+    def __init__(self, width: int, height: int):
+        super().__init__([" " * width for _ in range(height)])
+        self.width = width
+        self.height = height
 
-def print_canvas(canvas: list[str, ...]):  # Print the canvas to see the result
-    """
-    Prints the given canvas adding the column and row numbers' ones place on top, at the bottom and on both sides. It
-    makes use of an inner function, create_row_headers, to create the headers.
-    :param canvas: The canvas to print
-    """
-
-    def create_row_headers(length: int):
-        """A helper function to create the headers when printing the canvas"""
-        return "".join([str(i % 10) for i in range(length)])
-
-    header = " " + create_row_headers(len(canvas[0]))
-    print(header)
-    for idx, row in enumerate(canvas):
-        print(idx % 10, row, idx % 10, sep="")
-    print(header)
+    def print_canvas(self):
+        header = " " + "".join([str(i % 10) for i in range(self.width)])
+        print(header)
+        for idx, row in enumerate(self):
+            print(idx % 10, row, idx % 10, sep="")
+        print(header)
 
 
 def draw_polygon(canvas: list[str, ...], *points: tuple[int, int], closed: bool = True, line_char: str = "*"):
@@ -83,8 +78,6 @@ def draw_polygon(canvas: list[str, ...], *points: tuple[int, int], closed: bool 
     # Draw each segment in turn. zip is used to build tuples each consisting of a start and an end point
     for start_point, end_point in zip(start_points, end_points):
         draw_line_segment(canvas, start_point, end_point, line_char)
-
-
 def draw_line(canvas: list[str, ...], start: tuple[int, int], end: tuple[int, int], line_char: str = "*"):
     """Uses the draw_polygon function to draw a line from the given start to the given end point."""
     draw_polygon(canvas, start, end, closed=False, line_char=line_char)
@@ -127,10 +120,12 @@ def draw_n_gon(canvas: list[str, ...], center: tuple[int, int], radius: int, num
     draw_polygon(canvas, *points, line_char=line_char)
 
 
+
 # Example usage:
 canvas_width = 100
 canvas_height = 40
-canvas = [" " * canvas_width for _ in range(canvas_height)]
+#canvas = [" " * canvas_width for _ in range(canvas_height)]
+canvas = Canvas(canvas_width, canvas_height)
 
 # A simple line
 draw_line(canvas, (10, 4), (92, 19), "+")
@@ -142,4 +137,5 @@ draw_rectangle(canvas, (45, 2), (80, 27), line_char='#')
 draw_n_gon(canvas, (72, 25), 12, 20, 80, "-")
 
 # Print what we have painted
-print_canvas(canvas)
+#print_canvas(canvas)
+canvas.print_canvas()
