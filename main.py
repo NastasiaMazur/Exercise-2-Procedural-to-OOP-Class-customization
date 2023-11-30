@@ -18,6 +18,24 @@ p3 = Point(12.2, 28.7)
 
 print(p1)
 print([p1, p2, p3])
+
+
+class Shape(list[Point,...]):   #a shape class inherits from a list of points --> it has all the properties list of points has
+    def __init__(self, *points):            # this would be inheritance
+        self.points = list(points)
+
+    def __str__(self):
+        return f"Shape {self.points}"
+
+# Example usage:
+s1 = Shape(p1, p2, p3)
+s2 = Shape(p2)
+s3 = Shape()
+
+print(s1)
+print(s2)
+print(s3)
+
 class Canvas(list):
     def __init__(self, width: int, height: int):
         super().__init__([" " * width for _ in range(height)])
@@ -104,12 +122,13 @@ class Canvas(list):
         # Use the draw_polygon function to draw all the lines of the n-gon
         self.draw_polygon(*points, line_char=line_char)
 
-#def draw_line(canvas: list[str, ...], start: tuple[int, int], end: tuple[int, int], line_char: str = "*"):
- #   """Uses the draw_polygon function to draw a line from the given start to the given end point."""
-  #  draw_polygon(canvas, start, end, closed=False, line_char=line_char)
+
+# def draw_line(canvas: list[str, ...], start: tuple[int, int], end: tuple[int, int], line_char: str = "*"):
+#   """Uses the draw_polygon function to draw a line from the given start to the given end point."""
+#  draw_polygon(canvas, start, end, closed=False, line_char=line_char)
 
 
-#def draw_rectangle(canvas: list[str, ...], upper_left: tuple[int, int], lower_right: tuple[int, int],
+# def draw_rectangle(canvas: list[str, ...], upper_left: tuple[int, int], lower_right: tuple[int, int],
 #                   line_char: str = "*"):
 #    """Uses the draw_polygon function to draw a rectangle from the given upper-left to the given lower-right corner."""
 #    x1, y1 = upper_left
@@ -120,7 +139,7 @@ class Canvas(list):
 """
 def draw_n_gon(canvas: list[str, ...], center: tuple[int, int], radius: int, number_of_points: int, rotation: int = 0,
                line_char: str = "*"):
-    
+
     # Distribute the points evenly around a circle
     angles = range(rotation, 360 + rotation, 360 // number_of_points)
 
@@ -138,26 +157,25 @@ def draw_n_gon(canvas: list[str, ...], center: tuple[int, int], radius: int, num
     draw_polygon(canvas, *points, line_char=line_char)
 """
 
-
 # Example usage:
 canvas_width = 100
 canvas_height = 40
-#canvas = [" " * canvas_width for _ in range(canvas_height)]
+# canvas = [" " * canvas_width for _ in range(canvas_height)]
 canvas = Canvas(canvas_width, canvas_height)
 
 # A simple line
-#draw_line(canvas, (10, 4), (92, 19), "+")
+# draw_line(canvas, (10, 4), (92, 19), "+")
 canvas.draw_line((10, 4), (92, 19), "+")
 # A polygon with five points, the last point will be connected to the first one
-#draw_polygon(canvas, (7, 12), (24, 29), (42, 15), (37, 32), (15, 35))
+# draw_polygon(canvas, (7, 12), (24, 29), (42, 15), (37, 32), (15, 35))
 canvas.draw_polygon((7, 12), (24, 29), (42, 15), (37, 32), (15, 35))
 # A rectangle from the upper-left corner to the lower-right corner
-#draw_rectangle(canvas, (45, 2), (80, 27), line_char='#')
+# draw_rectangle(canvas, (45, 2), (80, 27), line_char='#')
 canvas.draw_rectangle((45, 2), (80, 27), line_char='#')
 # An n-gon with a high number of points will appear like a circle
-#draw_n_gon(canvas, (72, 25), 12, 20, 80, "-")
+# draw_n_gon(canvas, (72, 25), 12, 20, 80, "-")
 canvas.draw_n_gon((72, 25), 12, 20, 80, "-")
 
 # Print what we have painted
-#print_canvas(canvas)
+# print_canvas(canvas)
 canvas.print()
