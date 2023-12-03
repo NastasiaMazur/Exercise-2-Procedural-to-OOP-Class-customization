@@ -1,5 +1,6 @@
 import math
 
+# Assignment 2. Phase1
 class Point:
     def __init__(self, x: float, y: float):
         self.x = x
@@ -11,6 +12,9 @@ class Point:
     def __repr__(self):
         return self.__str__()
 
+# The __str__ method is used to print a single object.
+# The __repr__ method is used to print a collection of objects (like when using print([p1, p2, p3]) in the example).
+
 # Example usage:
 p1 = Point(2.3, 43.14)
 p2 = Point(5.53, 2.5)
@@ -19,13 +23,16 @@ p3 = Point(12.2, 28.7)
 print(p1)
 print([p1, p2, p3])
 
-
+# Assignment 2. Phase2
 class Shape(list[Point,...]):   #a shape class inherits from a list of points --> it has all the properties list of points has
     def __init__(self, *points):            # this would be inheritance
         self.points = list(points)
 
     def __str__(self):
         return f"Shape {self.points}"
+
+    def __repr__(self):
+        return self.__str__()
 
 # Example usage:
 s1 = Shape(p1, p2, p3)
@@ -179,3 +186,4 @@ canvas.draw_n_gon((72, 25), 12, 20, 80, "-")
 # Print what we have painted
 # print_canvas(canvas)
 canvas.print()
+
