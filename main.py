@@ -34,10 +34,28 @@ class Shape(list[Point,...]):   #a shape class inherits from a list of points --
     def __repr__(self):
         return self.__str__()
 
+    def centroid(self) -> Point:
+        if not self.points:
+            raise ValueError("Cannot calculate centroid for an empty shape")
+
+        n = len(self.points)
+        avg_x = sum(point.x for point in self.points) / n
+        avg_y = sum(point.y for point in self.points) / n
+
+        return Point(avg_x, avg_y)
+
 # Example usage:
 s1 = Shape(p1, p2, p3)
 s2 = Shape(p2)
 s3 = Shape()
+
+s4 = Shape(Point(0, 0), Point(0, 1), Point(1, 1), Point(1, 0))
+s5 = Shape(Point(0, 0.5), Point(0.5, 1), Point(1, 0.5), Point(0.5, 0))
+s6 = Shape(Point(0.25, 0.25), Point(0.25, 0.75), Point(0.75, 0.75), Point(0.75, 0.25))
+
+print(s4.centroid())  # Output: (0.5/0.5)
+print(s5.centroid())  # Output: (0.5/0.5)
+print(s6.centroid())  # Output: (0.5/0.5)
 
 print(s1)
 print(s2)
