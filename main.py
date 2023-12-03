@@ -1,16 +1,19 @@
 import math
 
-# Assignment 2. Phase1
+# Assignment 2. Phase1, Phase 4
 class Point:
     def __init__(self, x: float, y: float):
-        self.x = x
-        self.y = y
+        self.x = float(x)
+        self.y = float(y)
 
     def __str__(self):
         return f"({self.x}/{self.y})"
 
     def __repr__(self):
         return self.__str__()
+
+    def distance_from_origin(self) -> float:
+        return math.sqrt(self.x ** 2 + self.y ** 2)
 
 # The __str__ method is used to print a single object.
 # The __repr__ method is used to print a collection of objects (like when using print([p1, p2, p3]) in the example).
@@ -22,6 +25,15 @@ p3 = Point(12.2, 28.7)
 
 print(p1)
 print([p1, p2, p3])
+
+# Example usage
+p4 = Point(1, 1)
+p5 = Point(5, 5)
+p6 = Point(10, 10)
+
+print(p4.distance_from_origin())  # Output: 1.4142135623730951
+print(p5.distance_from_origin())  # Output: 7.0710678118654755
+print(p6.distance_from_origin())  # Output: 14.142135623730951
 
 # Assignment 2. Phase2
 class Shape(list[Point,...]):   #a shape class inherits from a list of points --> it has all the properties list of points has
